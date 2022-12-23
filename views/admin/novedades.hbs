@@ -1,0 +1,64 @@
+<div class=" htext align-items:top;">
+    {{!-- fila 1 --}}
+    <div class="row" style="text-align: right;">
+        <div class="col-md-7 offset-md-4">
+            <p class="text-end">
+            <h2>Hola {{persona}}!</h2> <a class="btn btn-danger" href="/admin/login/logout">Cerrar Sesión<i
+                    class="fas fa-sign-out-alt"></i></a></p>
+        </div>
+    </div>
+    {{!-- FIN fila 1 --}}
+    {{!--inicio fila 2 --}}
+    <div class="row">
+        <div class="col-7 offset-md-1" style="margin-top: 9px;">
+            <h2>Listado de Novedades</h2>
+        </div>
+        <div class="col-1 text-end">
+            <a href="/admin/novedades/agregar" class="btn btn-success"><i class="fas fa-plus"></i>Nuevo</a>
+        </div>
+        <div class="col-2 d-flex justify-text-end">
+            <form class="d-flex" role="search" action="/admin/novedades" method="get">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="q" {{#if
+                    q}} value="{{q}}" {{/if}}>
+                <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"
+                        aria-hidden="true"></i></button>
+            </form>
+        </div>
+    </div>
+    {{!-- FIN fila 2 --}}
+    {{!--inicio fila 3 --}}
+    <div class="container row" style="margin:auto; padding-top:1rem">
+        <div class="col">
+            <table class="table table-bordered htext">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col" class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each novedades}}
+                    <tr>
+                        <th scope="row">{{id}}</th>
+                        <td>{{titulo}}</td>
+                        <td>{{{imagen}}}</td>
+                        <td class="text-end">
+                            <a href="/admin/novedades/modificar/{{id}}" class="btn btn-secondary"><i
+                                    class="fas fa-pencil-alt"></i></a>
+                            <a href="/admin/novedades/eliminar/{{id}}" class="btn btn-secondary"><i
+                                    class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{#if is_search}}
+                {{#unless novedades.length}}
+                     No se encontraron resultados para "<b>{{q}}</b>"
+                {{/unless}}
+            {{/if}}
+        </div>
+    </div>
+</div>
