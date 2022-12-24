@@ -6,7 +6,7 @@ var cloudinary = require('cloudinary').v2;
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
-
+ 
   var novedades = await novedadesModel.getNovedades();
   novedades = novedades.splice(0, 5); //seleccionamos los primeros 5 elementos del array
   novedades = novedades.map(novedad => {
@@ -25,9 +25,13 @@ router.get('/', async function (req, res, next) {
         imagen: '/images/noimage.jpg'
       }
     }
-  });
+  })
 
-  // router.post('/', async (req, res, next) => {
+  res.render('index', {
+    novedades
+  })
+
+  router.post('/', async (req, res, next) => {
 
     console.log(req.body);
 
@@ -60,6 +64,7 @@ router.get('/', async function (req, res, next) {
       novedades
     });
   })
-// })
+})
+
 module.exports = router
 
